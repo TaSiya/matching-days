@@ -6,9 +6,11 @@
    <meta http-equiv="X-UA-Compatible" content="ie=edge">
    <meta name="description" content="This app will match the days entered by the user. The user will enter two days and the app will compare the dates.">
    <meta name="keywords" content="days, matching, matching days, Siyanda Makhalima">
-
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
    <script type="text/x-template" class='daysTemplate'>
-
+      {{#each myList}}
+      <div>{{date}}</div>
+      {{/each}}
    </script>
 
    <link rel="stylesheet" href="css/style.css">
@@ -22,23 +24,19 @@
    <div class="wrapper">
       <section class="sectionDays">
          <div class="days">
-            <div>Monday</div>
-            <div>Tuesday</div>
-            <div>Wednesday</div>
-            <div>Thursday</div>
-            <div>Friday</div>
+            
          </div>
       </section>
 
       <section class="sectionDate">
          <div class="first">
             1st date:
-            <input type="input" name='dates' class='dates' placeholder="Enter first date">
+            <input type="date" name='dates' class='date1' placeholder="Enter first date">
          </div>
 
          <div class="second">
             2nd date:
-            <input type="text" name="dates" class='dates' placeholder="Enter second date">
+            <input type="date" name="dates" class='date2' placeholder="Enter second date">
          </div>
       </section>
 
