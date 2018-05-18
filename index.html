@@ -8,8 +8,11 @@
    <meta name="keywords" content="days, matching, matching days, Siyanda Makhalima">
    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
    <script type="text/x-template" class='daysTemplate'>
-      {{#each myList}}
-      <div class='{{date}}'>{{date}}</div>
+      {{#each dates}}
+      {{cyan}}
+      {{purple}}
+      {{green}}
+      <div class='{{this}}'>{{this}}</div>
       {{/each}}
    </script>
 
@@ -45,5 +48,6 @@
       <p>Copyright &copy; 2018. <a href="https://tasiya.github.io/folio/" target='_blank'><em>Siyanda Makhalima</em></a></p>
    </footer>
 </body>
+<script src='js/main-logic.js'></script>
 <script src='js/matching-days.js'></script>
 </html>
