@@ -12,6 +12,13 @@ document.addEventListener('DOMContentLoaded', function(){
    var compiledDate = dateCompiler({
       dates : matcher.dateArray()
    });
+
+   if(matcher.areDatesSame()){
+      
+   }
+   else{
+      
+   }
    days.innerHTML = compiledDate;
 });
 

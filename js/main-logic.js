@@ -1,12 +1,17 @@
 
 function Matching_days(){
    var dateMap = {'Sunday':0, 'Monday':1, 'Tuesday':2, 'Wednesday':3, 'Thursday':4, 'Friday':5, 'Saturday':6};
-   var date1 = new Date();
-   var date2 = new Date();
+   var date1 = 0;
+   var date2 = 0;
 
-   function setDates(first, second){
-      if(first !== undefined && second !== undefined){
+   function setDate1(first){
+      if(first !== undefined){
          date1 = first.getDay();
+      }
+   }
+
+   function setDate2(second){
+      if(second !== undefined){
          date2 = second.getDay();
       }
    }
@@ -26,7 +31,8 @@ function Matching_days(){
    }
 
    return {
-      settingDates : setDates,
+      settingDate1 : setDate1,
+      settingDate2 : setDate2,
       firstDate : getDate1,
       secondDate : getDate2,
       areDatesSame : areSame,
