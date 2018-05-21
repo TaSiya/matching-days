@@ -10,10 +10,12 @@ var Thursday = '';
 var Friday = '';
 var Saturday ='';
 var Sunday ='';
+var firstDateReference = '';
+var secondDateReference = '';
 
 var dateCompiler = Handlebars.compile(daysTemplate);
 
-var matcher =  Matching_days();
+var matcher =  MatchingDays();
 
 document.addEventListener('DOMContentLoaded', function(){
    var compiledDate = dateCompiler({
@@ -21,18 +23,35 @@ document.addEventListener('DOMContentLoaded', function(){
    });
    days.innerHTML = compiledDate;
    referenceWeekdays();
-   colour();
 });
 
 date1.addEventListener('change', function(){
+   removeColour();
    referenceWeekdays();
    matcher.settingDate1(date1.value);
-   colour();
+   if(matcher.areDatesSame()){
+      firstDateReference.classList.add('green');
+   }
+   else{
+      console.log(firstDateReference.innerHTML);
+      console.log(secondDateReference.innerHTML);
+      firstDateReference.classList.add('cyan');
+      secondDateReference.classList.add('red');
+   }
+
 });
 date2.addEventListener('change', function(){
+   removeColour();
    referenceWeekdays();
    matcher.settingDate2(date2.value);
-   colour();
+   if(matcher.areDatesSame()){
+      secondDateReference.classList.add('green');
+   }
+   else{
+      firstDateReference.classList.add('cyan');
+      secondDateReference.classList.add('red');
+
+   }
 });
 
 function referenceWeekdays(){
@@ -43,32 +62,20 @@ function referenceWeekdays(){
    Friday = document.querySelector('.Friday');
    Saturday = document.querySelector('.Saturday');
    Sunday = document.querySelector('.Sunday');
+
+   var firstTemp = matcher.dateChecker(matcher.firstDate());
+   firstDateReference = document.querySelector('.'+firstTemp);
+   var secondTemp = matcher.dateChecker(matcher.secondDate());
+   secondDateReference = document.querySelector('.'+secondTemp);
 }
 
-function colour(){
-   
-   if(matcher.firstDate() == matcher.secondDate()){
-      switch(matcher.firstDate()){
-      case 0:
-           Sunday.classList.add('green')
-           break;
-      case 1:
-           Monday.classList.add('green')
-           break;
-      case 2:
-           Tuesday.classList.add('green')
-           break;
-      case 3:
-           Wednesday.classList.add('green')
-           break;
-      case 4:
-           Thursday.classList.add('green')
-           break;
-      case 5:
-           Friday.classList.add('green')
-           break;
-      case 6:
-           Saturday.classList.add('green')
-      }
-   }
+function removeColour(){
+   Sunday.classList.remove('red', 'green', 'cyan');
+   Monday.classList.remove('red', 'green', 'cyan');
+   Tuesday.classList.remove('red', 'green', 'cyan');
+   Wednesday.classList.remove('red', 'green', 'cyan');
+   Thursday.classList.remove('red', 'green', 'cyan');
+   Friday.classList.remove('red', 'green', 'cyan');
+   Saturday.classList.remove('red', 'green', 'cyan');
+
 }
