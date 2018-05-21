@@ -5,15 +5,13 @@ function Matching_days(){
    var date2 = 0;
 
    function setDate1(first){
-      if(first !== undefined){
-         date1 = first.getDay();
-      }
+      var temp = new Date(first);
+      date1 = temp.getDay();
    }
 
    function setDate2(second){
-      if(second !== undefined){
-         date2 = second.getDay();
-      }
+      var temp = new Date(second);
+      date2 = temp.getDay();
    }
 
    function getDate1(){return date1;}
