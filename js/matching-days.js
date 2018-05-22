@@ -3,26 +3,19 @@ var date1 = document.querySelector('.date1');
 var date2 = document.querySelector('.date2');
 var daysTemplate = document.querySelector('.daysTemplate').innerHTML;
 
-var Monday = '';
-var Tuesday = '';
-var Wednesday = '' ;
-var Thursday = '';
-var Friday = '';
-var Saturday ='';
-var Sunday ='';
-var firstDateReference = '';
-var secondDateReference = '';
 
 var dateCompiler = Handlebars.compile(daysTemplate);
 
 var matcher =  MatchingDays();
 
 document.addEventListener('DOMContentLoaded', function(){
+   console.log(matcher.andWe());
    var compiledDate = dateCompiler({
-      dates : matcher.dateArray()
+      dates :matcher.andWe(),
    });
+
    days.innerHTML = compiledDate;
-   referenceWeekdays();
+   //referenceWeekdays();
 });
 
 date1.addEventListener('change', function(){
@@ -33,10 +26,14 @@ date1.addEventListener('change', function(){
       firstDateReference.classList.add('green');
    }
    else{
-      console.log(firstDateReference.innerHTML);
-      console.log(secondDateReference.innerHTML);
-      firstDateReference.classList.add('cyan');
-      secondDateReference.classList.add('red');
+      if(matcher.secondDate() != 0){
+         firstDateReference.classList.add('cyan');
+         secondDateReference.classList.add('red');
+      }
+      else{
+         firstDateReference.classList.add('cyan');
+      }
+
    }
 
 });
@@ -48,8 +45,14 @@ date2.addEventListener('change', function(){
       secondDateReference.classList.add('green');
    }
    else{
-      firstDateReference.classList.add('cyan');
-      secondDateReference.classList.add('red');
+      if(matcher.firstDate()){
+         firstDateReference.classList.add('cyan');
+         secondDateReference.classList.add('red');
+      }
+      else{
+         secondDateReference.classList.add('red');
+      }
+
 
    }
 });

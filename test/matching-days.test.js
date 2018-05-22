@@ -33,5 +33,11 @@ describe('Matching days web App', function(){
          assert.equal(match2.areDatesSame(), true);
       });
    });
-   
+   describe('Are dates corresponding to correct Weekday name', function(){
+      var match3 = MatchingDays();
+      it('Is Sunday 0', function(){
+         var key = match3.dateChecker(0);
+         assert.equal(key, 'Sunday');
+      });
+   });
 });

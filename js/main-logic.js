@@ -1,9 +1,20 @@
 
 function MatchingDays(){
-   var dateMap = {'Sunday':0, 'Monday':1, 'Tuesday':2, 'Wednesday':3, 'Thursday':4, 'Friday':5, 'Saturday':6};
+   var dateList = [{weekDay:'Sunday'},{weekDay:'Monday'},{weekDay:'Tuesday'},{weekDay:'Wednesday'},{weekDay:'Thursday'},{weekDay:'Friday'},{weekDay:'Saturday'}];
+   var colours = [{className:'green'},{className:'cyan'},{className:'red'}]
+   var storedMap = [];
    var date1 = 0;
    var date2 = 0;
+   var date = '';
+   var empty = {};
 
+   function getList(){ return dateList;}
+   function getColours(){ return colours;}
+
+   function andThen(){
+      empty = {dateList,colours};
+      return empty;
+   }
    function setDate1(first){
       var temp = new Date(first);
       date1 = temp.getDay();
@@ -24,25 +35,30 @@ function MatchingDays(){
       return false;
    }
 
-   function checkDate(date){
-      for(key in dateMap){
-         if(date == dateMap[key]){
-            return key;
+   function checkDate(date1, date2){
+      for(var i = 0; i < dateList.length; i++){
+         if(areSame()){
+            storeMap[green] = 'green';
+            storeMap[weekday] = dateList[date1];
+         }
+         else{
+            storeMap[cyan] = 'cyan';
+
+
          }
       }
    }
 
-   function dateList(){
-      return Object.keys(dateMap);
-   }
 
    return {
+      andWe : andThen,
+      listData : getList,
+      color : getColours,
       settingDate1 : setDate1,
       settingDate2 : setDate2,
       firstDate : getDate1,
       secondDate : getDate2,
       areDatesSame : areSame,
-      dateArray : dateList,
-      dateChecker : checkDate
+      dateChecker : checkDate,
    }
 }
