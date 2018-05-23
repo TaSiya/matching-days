@@ -1,64 +1,52 @@
-
 function MatchingDays(){
-   var dateList = [{weekDay:'Sunday'},{weekDay:'Monday'},{weekDay:'Tuesday'},{weekDay:'Wednesday'},{weekDay:'Thursday'},{weekDay:'Friday'},{weekDay:'Saturday'}];
-   var colours = [{className:'green'},{className:'cyan'},{className:'red'}]
-   var storedMap = [];
-   var date1 = 0;
-   var date2 = 0;
-   var date = '';
-   var empty = {};
+  var weekDays = ['Sunday','Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
-   function getList(){ return dateList;}
-   function getColours(){ return colours;}
+  var weekdaysData = { weekdays: [
+      {label: "Monday", value: "monday", style: "normal"},
+      {label: "Tuesday", value: "tuesday", style: "normal"},
+      {label: "Wednesday", value: "wednesday", style: "normal"},
+      {label: "Thursday", value: "thursday", style: "normal"},
+      {label: "Friday", value: "friday", style: "normal"},
+      {label: "Saturday", value: "saturday", style: "normal"},
+      {label: "Sunday", value: "sunday", style: "normal"}
+    ]};
 
-   function andThen(){
-      empty = {dateList,colours};
-      return empty;
-   }
-   function setDate1(first){
-      var temp = new Date(first);
-      date1 = temp.getDay();
-   }
+  function sameWeekday(date1, date2){
 
-   function setDate2(second){
-      var temp = new Date(second);
-      date2 = temp.getDay();
-   }
+       var firstDate = new Date(date1);
+       var secondDate = new Date(date2);
 
-   function getDate1(){return date1;}
-   function getDate2(){return date2;}
+    return weekDays[firstDate.getDay()] == weekDays[secondDate.getDay()];
+  };
 
-   function areSame(){
-      if(date1 == date2){
-         return true;
+  function checkWeekdays(){
+    return weekDays;
+  }
+
+  function checkWeekdaysData(){
+    return weekdaysData;
+  }
+
+  function checkDayName(date){
+    return weekDays[new Date(date).getDay()];
+  }
+
+  function updateDayStyle(weekdaysList, day, style){
+    
+    weekdaysList.weekdays.map(weekday =>{
+      if(weekday.label == day){
+        weekday.style = style;
       }
-      return false;
-   }
+    })
 
-   function checkDate(date1, date2){
-      for(var i = 0; i < dateList.length; i++){
-         if(areSame()){
-            storeMap[green] = 'green';
-            storeMap[weekday] = dateList[date1];
-         }
-         else{
-            storeMap[cyan] = 'cyan';
+    return weekdaysList;
+  }
 
-
-         }
-      }
-   }
-
-
-   return {
-      andWe : andThen,
-      listData : getList,
-      color : getColours,
-      settingDate1 : setDate1,
-      settingDate2 : setDate2,
-      firstDate : getDate1,
-      secondDate : getDate2,
-      areDatesSame : areSame,
-      dateChecker : checkDate,
-   }
+  return {
+    isSameWeekday : sameWeekday,
+    getWeekdays : checkWeekdays,
+    getWeekdaysData : checkWeekdaysData,
+    getWeekday : checkDayName,
+    setDayStyle : updateDayStyle
+  }
 }

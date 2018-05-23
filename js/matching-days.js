@@ -1,84 +1,66 @@
-var days = document.querySelector('.days');
-var date1 = document.querySelector('.date1');
-var date2 = document.querySelector('.date2');
-var daysTemplate = document.querySelector('.daysTemplate').innerHTML;
+var daysDisplay = document.querySelector(".daysDisplay");
+var date1 = document.querySelector(".date1");
+var date2 = document.querySelector(".date2");
 
+var daysTemplate = document.querySelector(".daysTemplate").innerHTML;
+var daysTemplateCompiler = Handlebars.compile(daysTemplate);
 
-var dateCompiler = Handlebars.compile(daysTemplate);
+date1.addEventListener('change', handleDateChange);
+date2.addEventListener('change', handleDateChange);
 
-var matcher =  MatchingDays();
+var matchingDays = MatchingDays();
 
-document.addEventListener('DOMContentLoaded', function(){
-   console.log(matcher.andWe());
-   var compiledDate = dateCompiler({
-      dates :matcher.andWe(),
-   });
+showWeekdays(matchingDays.getWeekdaysData());
 
-   days.innerHTML = compiledDate;
-   //referenceWeekdays();
-});
+function showWeekdays(weekdaysObj){
 
-date1.addEventListener('change', function(){
-   removeColour();
-   referenceWeekdays();
-   matcher.settingDate1(date1.value);
-   if(matcher.areDatesSame()){
-      firstDateReference.classList.add('green');
-   }
-   else{
-      if(matcher.secondDate() != 0){
-         firstDateReference.classList.add('cyan');
-         secondDateReference.classList.add('red');
-      }
-      else{
-         firstDateReference.classList.add('cyan');
-      }
+  var weekdaysDataHTML = daysTemplateCompiler(weekdaysObj);
+// put the resulting HTML into the target elements innerHTML
 
-   }
+  daysDisplay.innerHTML = weekdaysDataHTML;
 
-});
-date2.addEventListener('change', function(){
-   removeColour();
-   referenceWeekdays();
-   matcher.settingDate2(date2.value);
-   if(matcher.areDatesSame()){
-      secondDateReference.classList.add('green');
-   }
-   else{
-      if(matcher.firstDate()){
-         firstDateReference.classList.add('cyan');
-         secondDateReference.classList.add('red');
-      }
-      else{
-         secondDateReference.classList.add('red');
-      }
-
-
-   }
-});
-
-function referenceWeekdays(){
-   Monday = document.querySelector('.Monday');
-   Tuesday = document.querySelector('.Tuesday');
-   Wednesday = document.querySelector('.Wednesday');
-   Thursday = document.querySelector('.Thursday');
-   Friday = document.querySelector('.Friday');
-   Saturday = document.querySelector('.Saturday');
-   Sunday = document.querySelector('.Sunday');
-
-   var firstTemp = matcher.dateChecker(matcher.firstDate());
-   firstDateReference = document.querySelector('.'+firstTemp);
-   var secondTemp = matcher.dateChecker(matcher.secondDate());
-   secondDateReference = document.querySelector('.'+secondTemp);
 }
 
-function removeColour(){
-   Sunday.classList.remove('red', 'green', 'cyan');
-   Monday.classList.remove('red', 'green', 'cyan');
-   Tuesday.classList.remove('red', 'green', 'cyan');
-   Wednesday.classList.remove('red', 'green', 'cyan');
-   Thursday.classList.remove('red', 'green', 'cyan');
-   Friday.classList.remove('red', 'green', 'cyan');
-   Saturday.classList.remove('red', 'green', 'cyan');
+function handleDateChange(){
 
+
+  var firstDateVal = date1.value;
+  var secondDateVal = date2.value;
+
+  if(firstDateVal !== "" && secondDateVal !== ""){
+
+    var weekdaysDataSample = matchingDays.getWeekdaysData().weekdays;
+
+    var weekdays = [];
+    for(var i=0;i<weekdaysDataSample.length;i++){
+
+      var currentWeek = weekdaysDataSample[i];
+      weekdays.push(Object.create(currentWeek));
+
+    }
+
+    var weekdaysData = {weekdays};
+
+     var isSameWeekday = matchingDays.isSameWeekday(firstDateVal, secondDateVal);
+     var weekdays = matchingDays.getWeekdays(firstDateVal);
+
+     if(isSameWeekday){
+        var sameday = matchingDays.getWeekday(firstDateVal);
+        var updatedWeekdaysData = matchingDays.setDayStyle(weekdaysData, sameday, "green");
+
+         showWeekdays(updatedWeekdaysData);
+
+     }else {
+       var day1 = matchingDays.getWeekday(firstDateVal);
+       var day2 = matchingDays.getWeekday(secondDateVal);
+
+       var updatedWeekdaysData = matchingDays.setDayStyle(weekdaysData, day1, "blue");
+
+       var latestUpdatedWeekdayData = matchingDays.setDayStyle(updatedWeekdaysData, day2, "red");
+
+       showWeekdays(latestUpdatedWeekdayData);
+
+     }
+
+  }
 }
