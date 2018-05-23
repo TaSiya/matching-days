@@ -22,13 +22,6 @@ function MatchingDays(){
    function getDate1(){return date1;}
    function getDate2(){return date2;}
 
-   function areSame(){
-      if(date1 == date2){
-         return true;
-      }
-      return false;
-   }
-
    function checkDate(date1, date2){
       for(var i = 0; i < dateList.length; i++){
          if(areSame()){

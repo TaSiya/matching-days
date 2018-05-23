@@ -1,5 +1,6 @@
 function MatchingDays(){
   var weekDays = ['Sunday','Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  var date1, date2 ;
 
   var weekdaysData = { weekdays: [
       {label: "Monday", value: "monday", style: "normal"},
@@ -11,13 +12,31 @@ function MatchingDays(){
       {label: "Sunday", value: "sunday", style: "normal"}
     ]};
 
-  function sameWeekday(date1, date2){
-
-       var firstDate = new Date(date1);
-       var secondDate = new Date(date2);
-
-    return weekDays[firstDate.getDay()] == weekDays[secondDate.getDay()];
+  function sameWeekday(dat1, dat2){
+       date1 = new Date(dat1);
+       date2 = new Date(dat2);
+    return weekDays[date1.getDay()] == weekDays[date2.getDay()];
   };
+
+  function determineColour(){
+     var weekdays = [];
+     var weekdaysDataList = checkWeekdaysData().weekdays;
+     for(var i = 0; i < weekdaysDataList.length ; i++){
+         var temp = weekdaysDataList[i];
+         weekdays.push(Object.create(temp));
+     }
+     var weekdaysData = {weekdays};
+
+     if(sameWeekday(date1,date2)){
+        var updatedWeekdaysData = updateDayStyle(weekdaysData, checkDayName(date1), "green");
+        return updatedWeekdaysData;
+     }
+     else{
+        var updateDay1 = updateDayStyle(weekdaysData, checkDayName(date1), "cyan");
+        var updateDay2 = updateDayStyle(updateDay1, checkDayName(date2), "red");
+        return updateDay2;
+     }
+ }
 
   function checkWeekdays(){
     return weekDays;
@@ -32,13 +51,12 @@ function MatchingDays(){
   }
 
   function updateDayStyle(weekdaysList, day, style){
-    
-    weekdaysList.weekdays.map(weekday =>{
-      if(weekday.label == day){
-        weekday.style = style;
-      }
-    })
-
+    var list = weekdaysList.weekdays;
+     for (var i = 0; i < list.length; i++) {
+        if(list[i].label == day){
+         list[i].style = style;
+       }
+     }
     return weekdaysList;
   }
 
@@ -47,6 +65,7 @@ function MatchingDays(){
     getWeekdays : checkWeekdays,
     getWeekdaysData : checkWeekdaysData,
     getWeekday : checkDayName,
-    setDayStyle : updateDayStyle
+    setDayStyle : updateDayStyle,
+    whichColour : determineColour
   }
 }
