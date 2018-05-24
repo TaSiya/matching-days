@@ -14,7 +14,7 @@ function MatchingDays() {
         style: "normal"
       },
       {
-        label: "Wednesday",
+        label: "Wednesday", 
         value: "wednesday",
         style: "normal"
       },

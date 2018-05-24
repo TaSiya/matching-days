@@ -100,7 +100,7 @@ describe('Matching days Tests', function () {
                         value: "sunday",
                         style: "normal"
                     }
-                ]
+                 ]
             });
         });
     });
