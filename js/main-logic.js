@@ -44,12 +44,10 @@ function MatchingDays() {
   function setDate1(date){
       date1 = new Date(date);
       date1 = date1.getDay();
-      console.log(date1);
    }
    function setDate2(date){
       date2 = new Date(date);
       date2 = date2.getDay();
-      console.log(date2);
    }
 
   function sameWeekday() {

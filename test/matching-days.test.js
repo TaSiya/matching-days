@@ -30,253 +30,137 @@ describe('Matching days Tests', function () {
         });
     });
     describe('Compare dates and assign colour', function(){
-      it('17 September 2017 <=> 7 October 2011', function(){
+      it('2 May 2018 <=> 7 April 2018', function(){
          var match3 = MatchingDays();
-
+         match3.settingDate1('2 May 2018');
+         match3.settingDate2('7 April 2018');
+         var weekdaysData0 = {
+            weekdays: [{
+                     label: "Monday",
+                     value: "monday",
+                     style: "normal"
+                 },
+                 {
+                     label: "Tuesday",
+                     value: "tuesday",
+                     style: "normal"
+                 },
+                 {
+                     label: "Wednesday",
+                     value: "wednesday",
+                     style: "cyan"
+                 },
+                 {
+                     label: "Thursday",
+                     value: "thursday",
+                     style: "normal"
+                 },
+                 {
+                     label: "Friday",
+                     value: "friday",
+                     style: "normal"
+                 },
+                 {
+                     label: "Saturday",
+                     value: "saturday",
+                     style: "red"
+                 },
+                 {
+                     label: "Sunday",
+                     value: "sunday",
+                     style: "normal"
+                 }
+            ]
+         };
+         assert.deepEqual(match3.whichColour(),weekdaysData0);
       });
-   })
-    describe('Are colours matching', function() {
-        var match4 = MatchingDays();
-        var weekdaysData = {
-           weekdays: [{
-                    label: "Monday",
-                    value: "monday",
-                    style: "normal"
-                },
-                {
-                    label: "Tuesday",
-                    value: "tuesday",
-                    style: "normal"
-                },
-                {
-                    label: "Wednesday",
-                    value: "wednesday",
-                    style: "normal"
-                },
-                {
-                    label: "Thursday",
-                    value: "thursday",
-                    style: "normal"
-                },
-                {
-                    label: "Friday",
-                    value: "friday",
-                    style: "normal"
-                },
-                {
-                    label: "Saturday",
-                    value: "saturday",
-                    style: "normal"
-                },
-                {
-                    label: "Sunday",
-                    value: "sunday",
-                    style: "normal"
-                }
-           ]
-        };
-        it('Is colour green same day', function () {
-            var weekdaysData1 = {
-                weekdays: [{
-                        label: "Monday",
-                        value: "monday",
-                        style: "green"
-                    },
-                    {
-                        label: "Tuesday",
-                        value: "tuesday",
-                        style: "normal"
-                    },
-                    {
-                        label: "Wednesday",
-                        value: "wednesday",
-                        style: "normal"
-                    },
-                    {
-                        label: "Thursday",
-                        value: "thursday",
-                        style: "normal"
-                    },
-                    {
-                        label: "Friday",
-                        value: "friday",
-                        style: "normal"
-                    },
-                    {
-                        label: "Saturday",
-                        value: "saturday",
-                        style: "normal"
-                    },
-                    {
-                        label: "Sunday",
-                        value: "sunday",
-                        style: "normal"
-                    }
-                ]
-            };
-            assert.deepEqual(weekdaysData1,match4.setDayStyle(weekdaysData, 'Monday', 'green'));
-        });
-        it('Different days.  Tuesday <=> Thursday', function(){
-           var weekdaysData = {
-              weekdays: [{
-                       label: "Monday",
-                       value: "monday",
-                       style: "normal"
-                   },
-                   {
-                       label: "Tuesday",
-                       value: "tuesday",
-                       style: "normal"
-                   },
-                   {
-                       label: "Wednesday",
-                       value: "wednesday",
-                       style: "normal"
-                   },
-                   {
-                       label: "Thursday",
-                       value: "thursday",
-                       style: "normal"
-                   },
-                   {
-                       label: "Friday",
-                       value: "friday",
-                       style: "normal"
-                   },
-                   {
-                       label: "Saturday",
-                       value: "saturday",
-                       style: "normal"
-                   },
-                   {
-                       label: "Sunday",
-                       value: "sunday",
-                       style: "normal"
-                   }
-              ]
-           };
-           var weekdaysData2 = {
-               weekdays: [{
-                       label: "Monday",
-                       value: "monday",
-                       style: "normal"
-                   },
-                   {
-                       label: "Tuesday",
-                       value: "tuesday",
-                       style: "cyan"
-                   },
-                   {
-                       label: "Wednesday",
-                       value: "wednesday",
-                       style: "normal"
-                   },
-                   {
-                       label: "Thursday",
-                       value: "thursday",
-                       style: "red"
-                   },
-                   {
-                       label: "Friday",
-                       value: "friday",
-                       style: "normal"
-                   },
-                   {
-                       label: "Saturday",
-                       value: "saturday",
-                       style: "normal"
-                   },
-                   {
-                       label: "Sunday",
-                       value: "sunday",
-                       style: "normal"
-                   }
-               ]
-           };
-           var colour1 = match4.setDayStyle(weekdaysData, 'Tuesday', 'cyan');
-           assert.deepEqual(weekdaysData2, match4.setDayStyle(colour1, 'Thursday', 'red'))
-        });
-        it('Different days. Sunday <=> Thursday', function(){
-           var match4 = MatchingDays()
-           var weekdaysData = {
-              weekdays: [{
-                       label: "Monday",
-                       value: "monday",
-                       style: "normal"
-                   },
-                   {
-                       label: "Tuesday",
-                       value: "tuesday",
-                       style: "normal"
-                   },
-                   {
-                       label: "Wednesday",
-                       value: "wednesday",
-                       style: "normal"
-                   },
-                   {
-                       label: "Thursday",
-                       value: "thursday",
-                       style: "normal"
-                   },
-                   {
-                       label: "Friday",
-                       value: "friday",
-                       style: "normal"
-                   },
-                   {
-                       label: "Saturday",
-                       value: "saturday",
-                       style: "normal"
-                   },
-                   {
-                       label: "Sunday",
-                       value: "sunday",
-                       style: "normal"
-                   }
-              ]
-           };
-           var weekdaysData3 = {
-               weekdays: [{
-                       label: "Monday",
-                       value: "monday",
-                       style: "normal"
-                   },
-                   {
-                       label: "Tuesday",
-                       value: "tuesday",
-                       style: "normal"
-                   },
-                   {
-                       label: "Wednesday",
-                       value: "wednesday",
-                       style: "normal"
-                   },
-                   {
-                       label: "Thursday",
-                       value: "thursday",
-                       style: "red"
-                   },
-                   {
-                       label: "Friday",
-                       value: "friday",
-                       style: "normal"
-                   },
-                   {
-                       label: "Saturday",
-                       value: "saturday",
-                       style: "normal"
-                   },
-                   {
-                       label: "Sunday",
-                       value: "sunday",
-                       style: "cyan"
-                   }
-               ]
-           };
-           var colour2 = match4.setDayStyle(weekdaysData, 'Sunday', 'cyan');
-           assert.deepEqual(weekdaysData3, match4.setDayStyle(colour2, 'Thursday', 'red'))
-        });
-    });
-
+      it('16 May 2018 <=> 30 May 2018', function(){
+         var match3 = MatchingDays();
+         match3.settingDate1('16 May 2018');
+         match3.settingDate2('30 May 2018');
+         var weekdaysData01 = {
+            weekdays: [{
+                     label: "Monday",
+                     value: "monday",
+                     style: "normal"
+                 },
+                 {
+                     label: "Tuesday",
+                     value: "tuesday",
+                     style: "normal"
+                 },
+                 {
+                     label: "Wednesday",
+                     value: "wednesday",
+                     style: "green"
+                 },
+                 {
+                     label: "Thursday",
+                     value: "thursday",
+                     style: "normal"
+                 },
+                 {
+                     label: "Friday",
+                     value: "friday",
+                     style: "normal"
+                 },
+                 {
+                     label: "Saturday",
+                     value: "saturday",
+                     style: "normal"
+                 },
+                 {
+                     label: "Sunday",
+                     value: "sunday",
+                     style: "normal"
+                 }
+            ]
+         };
+         assert.deepEqual(match3.whichColour(),weekdaysData01);
+      });
+      it('25 December 2017 <=> 25 December 2018', function(){
+         var match3 = MatchingDays();
+         match3.settingDate1('25 December 2017');
+         match3.settingDate2('25 December 2018');
+         var weekdaysData01 = {
+            weekdays: [{
+                     label: "Monday",
+                     value: "monday",
+                     style: "cyan"
+                 },
+                 {
+                     label: "Tuesday",
+                     value: "tuesday",
+                     style: "red"
+                 },
+                 {
+                     label: "Wednesday",
+                     value: "wednesday",
+                     style: "normal"
+                 },
+                 {
+                     label: "Thursday",
+                     value: "thursday",
+                     style: "normal"
+                 },
+                 {
+                     label: "Friday",
+                     value: "friday",
+                     style: "normal"
+                 },
+                 {
+                     label: "Saturday",
+                     value: "saturday",
+                     style: "normal"
+                 },
+                 {
+                     label: "Sunday",
+                     value: "sunday",
+                     style: "normal"
+                 }
+            ]
+         };
+         assert.deepEqual(match3.whichColour(),weekdaysData01);
+      });
+   });
 });
