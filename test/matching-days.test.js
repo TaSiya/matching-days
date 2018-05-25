@@ -2,29 +2,41 @@ describe('Matching days Tests', function () {
     describe('Are dates the same', function () {
         var match1 = MatchingDays();
         it('1 April 2017 - 20 May 2088', function () {
-            assert.equal(match1.isSameWeekday('1 April 2017', '20 May 2088'), false);
+            match1.settingDate1('1 April 2017');
+            match1.settingDate2('20 May 2088');
+            assert.equal(match1.isSameWeekday(), false);
         });
         it('2 May 2018 - 23 May 2018', function () {
-            assert.equal(match1.isSameWeekday('2 May 2018', '23 May 2018'), true);
+            match1.settingDate1('2 May 2018');
+            match1.settingDate2('23 May 2018');
+            assert.equal(match1.isSameWeekday(), true);
         });
         it('1 January 1 - 1 January 3000', function() {
-            assert.equal(match1.isSameWeekday('1 January 1', '1 January 3000'), false);
+            match1.settingDate1('1 January 1');
+            match1.settingDate2('1 January 3000');
+            assert.equal(match1.isSameWeekday(), false);
         });
     });
-    describe('check day name', function () {
+    describe('check day name using Numbers(0-6)', function () {
         var match2 = MatchingDays();
-        it('2 May 2018', function() {
-            assert.equal(match2.getWeekday('2 May 2018'), 'Wednesday');
+        it('Check day 2', function() {
+            assert.equal(match2.getWeekday(2), 'Tuesday');
         });
-        it('26 April 2008', function() {
-            assert.equal(match2.getWeekday('26 April 2008'), 'Saturday');
+        it('Check day 0', function() {
+            assert.equal(match2.getWeekday(0), 'Sunday');
         });
-        it('5 February 2038', function() {
-            assert.equal(match2.getWeekday('5 February 2038'), 'Friday');
+        it('Check day 5', function() {
+            assert.equal(match2.getWeekday(5), 'Friday');
         });
     });
+    describe('Compare dates and assign colour', function(){
+      it('17 September 2017 <=> 7 October 2011', function(){
+         var match3 = MatchingDays();
+
+      });
+   })
     describe('Are colours matching', function() {
-        var match3 = MatchingDays();
+        var match4 = MatchingDays();
         var weekdaysData = {
            weekdays: [{
                     label: "Monday",
@@ -102,7 +114,7 @@ describe('Matching days Tests', function () {
                     }
                 ]
             };
-            assert.deepEqual(weekdaysData1,match3.setDayStyle(weekdaysData, 'Monday', 'green'));
+            assert.deepEqual(weekdaysData1,match4.setDayStyle(weekdaysData, 'Monday', 'green'));
         });
         it('Different days.  Tuesday <=> Thursday', function(){
            var weekdaysData = {
@@ -181,8 +193,8 @@ describe('Matching days Tests', function () {
                    }
                ]
            };
-           var colour1 = match3.setDayStyle(weekdaysData, 'Tuesday', 'cyan');
-           assert.deepEqual(weekdaysData2, match3.setDayStyle(colour1, 'Thursday', 'red'))
+           var colour1 = match4.setDayStyle(weekdaysData, 'Tuesday', 'cyan');
+           assert.deepEqual(weekdaysData2, match4.setDayStyle(colour1, 'Thursday', 'red'))
         });
         it('Different days. Sunday <=> Thursday', function(){
            var match4 = MatchingDays()
@@ -262,9 +274,9 @@ describe('Matching days Tests', function () {
                    }
                ]
            };
-           var colour2 = match3.setDayStyle(weekdaysData, 'Sunday', 'cyan');
-           assert.deepEqual(weekdaysData3, match3.setDayStyle(colour2, 'Thursday', 'red'))
+           var colour2 = match4.setDayStyle(weekdaysData, 'Sunday', 'cyan');
+           assert.deepEqual(weekdaysData3, match4.setDayStyle(colour2, 'Thursday', 'red'))
         });
     });
-    
+
 });

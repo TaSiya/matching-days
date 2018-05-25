@@ -33,7 +33,9 @@ function handleDateChange(){
   var second = date2.value;
 
   if(first !== "" && second !== ""){
-      if(matchingDays.isSameWeekday(first,second)){
+     matchingDays.settingDate1(first);
+     matchingDays.settingDate2(second);
+      if(matchingDays.isSameWeekday()){
          showWeekdays(matchingDays.whichColour());
       }else {
        showWeekdays(matchingDays.whichColour());

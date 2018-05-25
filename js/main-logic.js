@@ -14,7 +14,7 @@ function MatchingDays() {
         style: "normal"
       },
       {
-        label: "Wednesday", 
+        label: "Wednesday",
         value: "wednesday",
         style: "normal"
       },
@@ -41,11 +41,20 @@ function MatchingDays() {
     ]
   };
 
-  function sameWeekday(dat1, dat2) {
-    date1 = new Date(dat1);
-    date2 = new Date(dat2);
-    return weekDays[date1.getDay()] == weekDays[date2.getDay()];
-  };
+  function setDate1(date){
+      date1 = new Date(date);
+      date1 = date1.getDay();
+      console.log(date1);
+   }
+   function setDate2(date){
+      date2 = new Date(date);
+      date2 = date2.getDay();
+      console.log(date2);
+   }
+
+  function sameWeekday() {
+    return weekDays[date1] == weekDays[date2];
+  }
 
   function determineColour() {
     var weekdays = [];
@@ -58,7 +67,7 @@ function MatchingDays() {
       weekdays
     };
 
-    if (sameWeekday(date1, date2)) {
+    if (sameWeekday()) {
       var updatedWeekdaysData = updateDayStyle(weekdaysData, checkDayName(date1), "green");
       return updatedWeekdaysData;
     } else {
@@ -77,28 +86,23 @@ function MatchingDays() {
   }
 
   function checkDayName(date) {
-    return weekDays[new Date(date).getDay()];
+    return weekDays[date];
   }
 
   function updateDayStyle(weekdaysList, day, style) {
     var list = weekdaysList.weekdays;
     for (var i = 0; i < list.length; i++) {
       if (list[i].label == day) {
-        console.log(list[i].style);
-        list[i].label = day;
         list[i].style = style;
-        console.log(list[i].style);
       }
     }
-    console.log(list);
-    console.log(weekdaysList);
     weekdaysList.weekdays = list;
-    console.log('another weekdaysList data');
-    console.log(weekdaysList);
     return weekdaysList;
   }
 
   return {
+    settingDate1 : setDate1,
+    settingDate2 : setDate2,
     isSameWeekday: sameWeekday,
     getWeekdays: checkWeekdays,
     getWeekdaysData: checkWeekdaysData,
