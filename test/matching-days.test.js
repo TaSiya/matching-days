@@ -30,7 +30,7 @@ describe('Matching days Tests', function () {
                 weekdays: [{
                         label: "Monday",
                         value: "monday",
-                        style: "normal"
+                        style: "green"
                     },
                     {
                         label: "Tuesday",
@@ -64,43 +64,8 @@ describe('Matching days Tests', function () {
                     }
                 ]
             };
-            assert.deepEqual(match3.setDayStyle(weekdaysData, 0, 'green'), {
-                weekdays: [{
-                        label: "Monday",
-                        value: "monday",
-                        style: "normal"
-                    },
-                    {
-                        label: "Tuesday",
-                        value: "tuesday",
-                        style: "normal"
-                    },
-                    {
-                        label: "Wednesday",
-                        value: "wednesday",
-                        style: "normal"
-                    },
-                    {
-                        label: "Thursday",
-                        value: "thursday",
-                        style: "normal"
-                    },
-                    {
-                        label: "Friday",
-                        value: "friday",
-                        style: "normal"
-                    },
-                    {
-                        label: "Saturday",
-                        value: "saturday",
-                        style: "normal"
-                    },
-                    {
-                        label: "Sunday",
-                        value: "sunday",
-                        style: "normal"
-                    }
-                 ]
+            assert.deepEqual(weekdaysData,match3.setDayStyle(weekdaysData, 'Monday', 'green'), {
+
             });
         });
     });
